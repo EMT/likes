@@ -37,6 +37,7 @@ class LikesController extends \lithium\action\Controller {
 			]);
 		}
 
+		header("Access-Control-Allow-Origin: *");
 		return compact('count');
 	}
 
@@ -54,6 +55,8 @@ class LikesController extends \lithium\action\Controller {
 				return ['status' => 'duplicate'];
 			}
 		}
+
+		header("Access-Control-Allow-Origin: *");
 		return ['status' => 'failed'];
 	}
 }
