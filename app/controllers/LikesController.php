@@ -43,7 +43,8 @@ class LikesController extends \lithium\action\Controller {
 
 	public function add() {
 		$like = Likes::create();
-
+		header("Access-Control-Allow-Origin: *");
+		
 		if ($this->request->data) {
 			$like->ip = $_SERVER['REMOTE_ADDR'];
 			try {
@@ -56,7 +57,6 @@ class LikesController extends \lithium\action\Controller {
 			}
 		}
 
-		header("Access-Control-Allow-Origin: *");
 		return ['status' => 'failed'];
 	}
 }
