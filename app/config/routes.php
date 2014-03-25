@@ -19,6 +19,9 @@
 use lithium\net\http\Router;
 use lithium\core\Environment;
 
+Router::connect('/{:controller}/{:action}/{:args}.{:type}');
+
+
 /**
  * With globalization enabled a localized route is configured by connecting a
  * continuation route. Once the route has been connected, all the other
@@ -27,10 +30,10 @@ use lithium\core\Environment;
  * Requests to routes like `/en/posts/edit/1138` or `/fr/posts/edit/1138` will
  * carry a locale, while `/posts/edit/1138` keeps on working as it did before.
  */
-if ($locales = Environment::get('locales')) {
-	$template = '/{:locale:' . join('|', array_keys($locales)) . '}/{:args}';
-	Router::connect($template, array(), array('continue' => true));
-}
+// if ($locales = Environment::get('locales')) {
+// 	$template = '/{:locale:' . join('|', array_keys($locales)) . '}/{:args}';
+// 	Router::connect($template, array(), array('continue' => true));
+// }
 
 /**
  * Here, we are connecting `'/'` (the base path) to controller called `'Pages'`,
@@ -40,13 +43,13 @@ if ($locales = Environment::get('locales')) {
  *
  * @see app\controllers\PagesController
  */
-Router::connect('/', 'Pages::view');
+// Router::connect('/', 'Pages::view');
 
 /**
  * Connect the rest of `PagesController`'s URLs. This will route URLs like `/pages/about` to
  * `PagesController`, rendering `/views/pages/about.html.php` as a static page.
  */
-Router::connect('/pages/{:args}', 'Pages::view');
+// Router::connect('/pages/{:args}', 'Pages::view');
 
 /**
  * Add the testing routes. These routes are only connected in non-production environments, and allow
@@ -92,6 +95,6 @@ if (!Environment::is('production')) {
  * In almost all cases, custom routes should be added above this one, since route-matching works in
  * a top-down fashion.
  */
-Router::connect('/{:controller}/{:action}/{:args}');
+// Router::connect('/{:controller}/{:action}/{:args}');
 
 ?>
